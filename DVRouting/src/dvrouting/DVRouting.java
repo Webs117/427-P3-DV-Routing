@@ -55,8 +55,14 @@ public class DVRouting {
         DatagramSocket UDPclientSocket = new DatagramSocket(routerPortNum);
         
         while(listening == true){
-            if(){
+            byte[] inPacketData = new byte[2048];
+            String 
             
+            DatagramPacket inDatagram = new DatagramPacket(inPacketData, inPacketData.length);
+            UDPclientSocket.receive(inDatagram);
+            
+            if(){
+                //inital link packet 
             }else{
                 //DV update 
             }
@@ -70,4 +76,9 @@ public class DVRouting {
        // while
     }
     
+    //Functions needed
+    
+    //Convert string into 2d array list
+    
+    //Convert 2d array list into one string 
 }
