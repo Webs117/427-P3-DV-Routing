@@ -63,8 +63,8 @@ public class DVControl {
                 
                 
                
-                
-                finalStr = "#" + linkNode1 + linkNode2 + linkCostStr;
+                //special character 
+                finalStr = "#" + linkNode1 + "," + routerPortNum1Str + "," + linkNode2 + "," +  routerPortNum2Str + "," + linkCostStr;
                 
                 finalStrData = finalStr.getBytes();
                 

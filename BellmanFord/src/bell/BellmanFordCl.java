@@ -17,10 +17,17 @@ public class BellmanFordCl{
     public static void main(String[] args) {
         // TODO code application logic here
         
-        String intial = "hello world";
+        String intial = "AB6C-BC5D-CD45D-";
         
-        BellmanFord test = new BellmanFord(intial);
+        String splitTag = "[-]";
+        String[] tableStr = intial.split(splitTag);
+        
+
+        
+        System.out.print("done");
         
     }
+    
+    
     
 }
