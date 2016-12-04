@@ -202,4 +202,29 @@ public class DVRouting {
         
     }
     
+    public static boolean compareTables(ArrayList<ArrayList<String>> one, ArrayList<ArrayList<String>> two)
+    {
+        boolean updated = false;
+        
+        // if tables are now same number of rows
+        if (one.size() != two.size()){
+            updated = true;
+        }
+        else{
+            for (int i = 0; i < one.size(); i++) {
+                // if rows do not have the same number of entries
+                if (one.get(i).size() != two.get(i).size())
+                {
+                    System.out.println("Error. Table row without 5 entries.");
+                    updated = true;
+                }
+                for (int j = 0; i < one.get(i).size(); j++)
+                    // if strings in same postion are ever not the same
+                    if (one.get(i).get(j) != two.get(i).get(j))
+                        updated = true;
+            }
+        }
+        return updated;
+    }
+    
 }

@@ -110,6 +110,8 @@ public class BellmanFord{
                     pos = j;
             }
             
+            
+            
             // do not add host node to host node table
             if (neighbor.get(i).get(1) != host.get(0).get(0))
             {   
@@ -130,11 +132,15 @@ public class BellmanFord{
 
                 if (pos >= 0)
                 {    // if dist to neighbor + dist to other is less than known distance from host to other
-                    if (distToNeighbor + Integer.parseInt(neighbor.get(i).get(2)) < Integer.parseInt(host.get(pos).get(2)))
+                    if (distToNeighbor + Integer.parseInt(neighbor.get(i).get(2)) != Integer.parseInt(host.get(pos).get(2)))
                     {   
                         host.get(pos).set(2, Integer.toString(distToNeighbor + Integer.parseInt(neighbor.get(i).get(2))));
-                        host.get(pos).set(3, Integer.toString(1 + Integer.parseInt(neighbor.get(i).get(3))));
                         host.get(pos).set(4, neighbor.get(0).get(0));
+                        
+                        if (host.get(0).get(0) == neighbor.get(0).get(0))
+                             host.get(pos).set(3, neighbor.get(i).get(3));
+                        else
+                             host.get(pos).set(3, Integer.toString(1 + Integer.parseInt(neighbor.get(i).get(3))));
                     }
                 }
             }
