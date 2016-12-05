@@ -179,7 +179,7 @@ public class DVRouting {
                         UDPclientSocket.send(updatedRouter);
                         }        
                     } 
-                    
+                    print2D(routerTable);
                     
                 }
                 
@@ -204,7 +204,9 @@ public class DVRouting {
                     DatagramPacket updatedRouter = new DatagramPacket(outPacketData, outPacketData.length, routerIp, Integer.parseInt(neighborPorts.get(i).get(1)));
                     UDPclientSocket.send(updatedRouter);
                     }        
-                }     
+                }  
+                
+                print2D(routerTable);
             }
         }
         

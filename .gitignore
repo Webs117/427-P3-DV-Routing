@@ -2,3 +2,7 @@
 /DV-Control/build/
 /DVRouting/build/
 /BellmanFord/build/
+
+*.class
+*.xml
+*.properties
