@@ -39,8 +39,13 @@ public class DVControl {
             
             if(input.equals("Link")){
                 String linkInput;
-                String finalStr;
-                byte[] finalStrData = new byte[2048];
+                
+                String finalStr1;
+                String finalStr2;
+                
+                byte[] finalStrData1 = new byte[2048];
+                byte[] finalStrData2 = new byte[2048];
+                
                 InetAddress routerIp = InetAddress.getLocalHost();
                 
                 
@@ -64,12 +69,16 @@ public class DVControl {
                 
                
                 //special character 
-                finalStr = "#" + linkNode1 + "," + routerPortNum1Str + "," + linkNode2 + "," +  routerPortNum2Str + "," + linkCostStr;
+                finalStr1 = "#" + linkNode1 + "," + linkNode2 + "," + linkCostStr  + "," + routerPortNum1Str + "," + routerPortNum2Str;
                 
-                finalStrData = finalStr.getBytes();
+                //special character 
+                finalStr2 = "#" + linkNode2 + "," + linkNode1 + "," + linkCostStr + "," + routerPortNum2Str + "," + routerPortNum1Str;
                 
-                DatagramPacket linkUpdateNode1 = new DatagramPacket(finalStrData, finalStrData.length, routerIp, routerPortNum1);
-                DatagramPacket linkUpdateNode2 = new DatagramPacket(finalStrData, finalStrData.length, routerIp, routerPortNum2);
+                finalStrData1 = finalStr1.getBytes();
+                finalStrData2 = finalStr2.getBytes();
+                
+                DatagramPacket linkUpdateNode1 = new DatagramPacket(finalStrData1, finalStrData1.length, routerIp, routerPortNum1);
+                DatagramPacket linkUpdateNode2 = new DatagramPacket(finalStrData2, finalStrData2.length, routerIp, routerPortNum2);
                 
                 UDPserverSocket.send(linkUpdateNode1);
                 UDPserverSocket.send(linkUpdateNode2);

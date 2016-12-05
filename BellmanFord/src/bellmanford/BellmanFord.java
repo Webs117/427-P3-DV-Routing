@@ -145,16 +145,4 @@ public class BellmanFord{
     }       
 }
     
-//}
-/*
-public class BellmanFordthing {
-    
-    //constructor
-    public BellmanFordthing(){  
-        
-    
-    }
-  */  
-    //main bellman ford algorithm 
-   
-//}
+

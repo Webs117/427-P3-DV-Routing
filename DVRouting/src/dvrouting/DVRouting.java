@@ -25,6 +25,14 @@ public class DVRouting {
         // TODO code application logic here
         
         //holds direct link cost info of active neighbors
+        
+         //A table
+         //A B 1 1 B
+         //A C 3  1 C
+                
+         //B table
+         //B A 50 1 A
+         
          ArrayList<ArrayList<String>> neighborLinks = new ArrayList<ArrayList<String>>();
          
          
@@ -76,26 +84,94 @@ public class DVRouting {
             int trimPos = getEmptySlots(packetData); 
             byte[] trimPacketData = Arrays.copyOfRange(packetData, 0, trimPos);
             
+            
+            //
             String packetStr = new String(trimPacketData);
             
             // # special character 
             if(trimPacketData[0] == 35){
-                //inital link packet or liink cost change 
+                //inital link packet or link cost change 
                 
                 //split intial link cost information by ,
                 String linkSplit = "[,]";
                 
-                
                 String[] controlPacketStr = packetStr.split(linkSplit);
-                
-                
-                
-                
+               
+                //Check if no links yet 
+                if(neighborLinks.size() == 0){
+                    //Add inital Link
+                    
+                    ArrayList<String> tempArr = new ArrayList<String>();
+                    
+                    ArrayList<String> tempArrHost1 = new ArrayList<String>();
+                    ArrayList<String> tempArrHost2 = new ArrayList<String>();
+                    
+                    // - 2 so you don't add the port numbers 
+                    for(int i  = 0; i < controlPacketStr.length - 2; i++){
+                        tempArr.add(controlPacketStr[i]);
+                    }
+                    
+                    //add 1 hop
+                    tempArr.add("1");
+                    
+                    //add last node visited
+                    tempArr.add(controlPacketStr[1]);
+                    
+                    //add to neighborLinks table
+                    neighborLinks.add(tempArr);
+                    
+                    // duplicate to router Dv table 
+                    routerTable.add(tempArr);
+                    
+                    //Add router name and port number
+                    tempArrHost1.add(controlPacketStr[0]);
+                    tempArrHost1.add(controlPacketStr[3]);
+                    
+                    //Add router name and port number
+                    tempArrHost1.add(controlPacketStr[1]);
+                    tempArrHost1.add(controlPacketStr[4]);
+                    
+                }else{
+                    ArrayList<String> tempArr = new ArrayList<String>();
+
+                    // - 2 so you don't add the port numbers 
+                    for(int i  = 0; i < controlPacketStr.length - 2; i++){
+                        tempArr.add(controlPacketStr[i]);
+                    }
+                    
+                    //Check for duplicates
+                    for(int i = 0; i < neighborLinks.size(); i++){
+                        //Duplicate found so update row. Link cost update 
+                        if((neighborLinks.get(i).get(0) + neighborLinks.get(i).get(1)).compareTo(controlPacketStr[0] + controlPacketStr[1]) == 1 ){
+                            neighborLinks.set(i, tempArr);
+                            
+                            
+                        }else{
+                            //no duplicate so add new row entry
+                            //If neighborLinks table is bigger than DV then Bellman should equalize the rows 
+                            //     So no need to add the line here 
+                            neighborLinks.add(tempArr);
+                            i = neighborLinks.size();
+                        }
+                    }
+                    //run Bellman with routerLinks table with current DV table 
+                    //routerTable = BellmanFordEval(routerTable, neighborLinks);
+                    //send 
+                    
+                }
+
+                // routerTable.size() send table after link updates 
                 
                 //When links update compare routerLink table with routerBV table 
                 
             }else{
                 //DV update 
+                
+                //convert t
+                //run bellamford two tables
+                
+                //compare then send update if updated
+                
             }
         }
         
