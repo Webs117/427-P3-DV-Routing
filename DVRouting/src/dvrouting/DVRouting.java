@@ -128,8 +128,12 @@ public class DVRouting {
                     tempArrHost1.add(controlPacketStr[3]);
                     
                     //Add router name and port number
-                    tempArrHost1.add(controlPacketStr[1]);
-                    tempArrHost1.add(controlPacketStr[4]);
+                    tempArrHost2.add(controlPacketStr[1]);
+                    tempArrHost2.add(controlPacketStr[4]);
+                    
+                    //Add ports to port table 
+                    neighborPorts.add(tempArrHost1);
+                    neighborPorts.add(tempArrHost2);
                     
                 }else{
                     ArrayList<String> tempArr = new ArrayList<String>();
