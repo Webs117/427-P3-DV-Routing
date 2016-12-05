@@ -165,6 +165,7 @@ public class DVRouting {
                 //When links update compare routerLink table with routerBV table 
                 
             }else{
+<<<<<<< HEAD
                 
                 ArrayList<ArrayList<String>> neighborTable = convertStrTo2D(packetStr);
                 ArrayList<ArrayList<String>> prevRouterTable = routerTable;
@@ -186,6 +187,15 @@ public class DVRouting {
                     UDPclientSocket.send(updatedRouter);
                     }        
                 }     
+=======
+                //DV update 
+                
+                //convert t
+                //run bellamford two tables
+                
+                //compare then send update if updated
+                
+>>>>>>> adamDev
             }
         }
         
