@@ -95,7 +95,27 @@ public class DVRouting {
                 //When links update compare routerLink table with routerBV table 
                 
             }else{
-                //DV update 
+                
+                ArrayList<ArrayList<String>> neighborTable = convertStrTo2D(packetStr);
+                ArrayList<ArrayList<String>> prevRouterTable = routerTable;
+                
+                //run ballman ford
+                routerTable = BellmanFord.BellmanFordEval(neighborTable, routerTable);
+             
+                if (compareTables(routerTable, prevRouterTable)) {
+                   
+                    String updatedTable = convertArrToStr(routerTable);
+                    byte[] outPacketData = new byte[2048];
+                    outPacketData = updatedTable.getBytes();
+                    InetAddress routerIp = InetAddress.getLocalHost();
+                    
+                    for (int i = 0; i < neighborPorts.size(); i++)
+                    {
+                    // send updated table to all neighbors
+                    DatagramPacket updatedRouter = new DatagramPacket(outPacketData, outPacketData.length, routerIp, Integer.parseInt(neighborPorts.get(i).get(1)));
+                    UDPclientSocket.send(updatedRouter);
+                    }        
+                }     
             }
         }
         
